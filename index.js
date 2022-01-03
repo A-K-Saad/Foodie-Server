@@ -25,6 +25,7 @@ const run = async () => {
     await client.connect();
     const database = client.db("Foodie");
     const productCollection = database.collection("products");
+    const cartCollection = database.collection("carts");
     const userCollection = database.collection("users");
     const orderCollection = database.collection("orders");
     const reviewCollection = database.collection("reviews");
@@ -82,6 +83,29 @@ const run = async () => {
         res.json(result);
       }
     });
+
+    //Get All Carts
+    app.get("/cart", async (req, res) => {
+      const result = await cartCollection.find({}).toArray();
+      res.json(result);
+    });
+
+    //Post Carts
+    app.post("/cart", async (req, res) => {
+      const result = await cartCollection.insertOne(req.body);
+      res.json(result);
+    });
+
+    //Get Someone's Full Cart
+    app.get(
+      "/cart/:userEmail",
+      async(req, (res) => {
+        const result = await cartCollection
+          .find({ userEmail: req.params.userEmail })
+          .toArray();
+        res.json(result);
+      })
+    );
 
     //Get Paginated Reviews
     app.get("/ratings/:productId", async (req, res) => {
