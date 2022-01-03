@@ -97,15 +97,12 @@ const run = async () => {
     });
 
     //Get Someone's Full Cart
-    app.get(
-      "/cart/:userEmail",
-      async(req, (res) => {
-        const result = await cartCollection
-          .find({ userEmail: req.params.userEmail })
-          .toArray();
-        res.json(result);
-      })
-    );
+    app.get("/cart/:userEmail", async (req, res) => {
+      const result = await cartCollection
+        .find({ userEmail: req.params.userEmail })
+        .toArray();
+      res.json(result);
+    });
 
     //Get Paginated Reviews
     app.get("/ratings/:productId", async (req, res) => {
