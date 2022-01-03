@@ -85,19 +85,19 @@ const run = async () => {
     });
 
     //Get All Carts
-    app.get("/cart", async (req, res) => {
+    app.get("/carts", async (req, res) => {
       const result = await cartCollection.find({}).toArray();
       res.json(result);
     });
 
     //Post Carts
-    app.post("/cart", async (req, res) => {
+    app.post("/carts", async (req, res) => {
       const result = await cartCollection.insertOne(req.body);
       res.json(result);
     });
 
     //Get Someone's Full Cart
-    app.get("/cart/:userEmail", async (req, res) => {
+    app.get("/carts/:userEmail", async (req, res) => {
       const result = await cartCollection
         .find({ userEmail: req.params.userEmail })
         .toArray();
