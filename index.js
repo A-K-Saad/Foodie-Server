@@ -96,6 +96,20 @@ const run = async () => {
       res.json(result);
     });
 
+    //Update Cart
+    app.put("/carts", async (req, res) => {
+      const result = await cartCollection.updateOne(
+        { _id: ObjectId(req.body._id) },
+        {
+          $set: {
+            quantity: req.body.quantity,
+            price: req.body.price,
+          },
+        }
+      );
+      res.json(result);
+    });
+
     //Get Someone's Full Cart
     app.get("/carts/:userEmail", async (req, res) => {
       const result = await cartCollection
