@@ -99,7 +99,7 @@ const run = async () => {
     //Get Someone's Full Cart
     app.get("/carts/:userEmail", async (req, res) => {
       const result = await cartCollection
-        .find({ userEmail: req.params.userEmail })
+        .find({ email: req.params.userEmail })
         .toArray();
       res.json(result);
     });
