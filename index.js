@@ -104,6 +104,14 @@ const run = async () => {
       res.json(result);
     });
 
+    //Delete a Cart
+    app.delete("/carts/:productId", async (req, res) => {
+      const result = await cartCollection.deleteOne({
+        _id: ObjectId(req.params.productId),
+      });
+      res.json(result);
+    });
+
     //Get Paginated Reviews
     app.get("/ratings/:productId", async (req, res) => {
       const currentPage = parseInt(req.query.currentPage);
