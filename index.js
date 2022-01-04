@@ -35,6 +35,7 @@ const run = async () => {
       const result = await productCollection.find({}).toArray();
       res.json(result);
     });
+
     //Get Specific Data
     app.get("/products/:productId", async (req, res) => {
       const result = await productCollection.findOne({
@@ -42,11 +43,23 @@ const run = async () => {
       });
       res.json(result);
     });
+
+    //Get Data Category Wise
+    app.get("/products/:category", async (req, res) => {
+      const result = await productCollection
+        .find({
+          category: req.params.category,
+        })
+        .toArray();
+      res.json(result);
+    });
+
     //Post porduct
     app.post("/products", async (req, res) => {
       const result = await productCollection.insertOne(req.body);
       res.json(result);
     });
+
     //Delete a Product
     app.delete("/products", async (req, res) => {
       const result = await productCollection.deleteOne({
