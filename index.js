@@ -97,9 +97,9 @@ const run = async () => {
     });
 
     //Update Cart
-    app.put("/carts", async (req, res) => {
+    app.put("/carts/:productId", async (req, res) => {
       const result = await cartCollection.updateOne(
-        { _id: ObjectId(req.body._id) },
+        { _id: ObjectId(req.params.productId) },
         {
           $set: {
             quantity: req.body.quantity,
