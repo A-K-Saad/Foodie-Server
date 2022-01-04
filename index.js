@@ -118,6 +118,14 @@ const run = async () => {
       res.json(result);
     });
 
+    //Delete someone's full cart
+    app.delete("/carts/:userEmail", async (req, res) => {
+      const result = await cartCollection.deleteMany({
+        email: req.params.userEmail,
+      });
+      res.json(result);
+    });
+
     //Delete a Cart
     app.delete("/carts/:productId", async (req, res) => {
       const result = await cartCollection.deleteOne({
@@ -204,8 +212,7 @@ const run = async () => {
 
     //Place Order
     app.post("/orders", async (req, res) => {
-      const order = req.body;
-      const result = await orderCollection.insertOne(order);
+      const result = await orderCollection.insertOne(req.body);
       res.json(result);
     });
 
