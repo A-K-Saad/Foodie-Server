@@ -45,7 +45,7 @@ const run = async () => {
     });
 
     //Get Data Category Wise
-    app.get("/products/:category", async (req, res) => {
+    app.get("/products/category/:category", async (req, res) => {
       const result = await productCollection
         .find({
           category: req.params.category,
